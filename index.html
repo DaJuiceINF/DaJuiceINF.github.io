@@ -157,6 +157,16 @@ This raised the need to innovate and develop systems that can be implemented to 
    
   </div>
 
+    
+    <tbody id="mydata">
+      
+      <tr>
+        <td>[[name]]</td>
+         <td>[[age]]</td>
+         <td>[[gender]]</td>
+         <td>[[deparment]]</td>
+      </tr>
+    </tbody>
   <!-- Footer -->
   <footer class="w3-container w3-padding-32 w3-dark-grey">
 
@@ -166,6 +176,7 @@ This raised the need to innovate and develop systems that can be implemented to 
 
 <!-- End page content -->
 </div>
+  
 
 <script>
 // Script to open and close sidebar
@@ -184,7 +195,7 @@ function w3_close() {
     return resp.json();
 }).then(function(data){
 
-    console.log(data);
+    $("mydata").mirandajs(data);
 })
   
   
