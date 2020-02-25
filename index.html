@@ -194,7 +194,19 @@ function w3_close() {
 
     return resp.json();
 }).then(function(data){
-
+if(data.lenth > 0)
+{
+  var temp = "";
+  data.forEach(u)=>
+  {
+    temp +="<tr>";
+     temp +="<td>"+u.name+"</td>";
+     temp +="<td>"+u.age+"</td>";
+     temp +="<td>"+u.gender+"</td>";
+    
+  })
+  document.getElementbyId("data").innerHTML = temp;
+}
     
 })
  
