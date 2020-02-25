@@ -197,8 +197,9 @@ function w3_close() {
 
     
 })
-  var json = require('./student.json')
-  $("#mydata").mirandajs(json);
+  import * as data from './student.json';
+const {name} = data;
+  $("#mydata").mirandajs(data);
 </script>
 
 </body>
