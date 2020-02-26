@@ -221,7 +221,7 @@ ${foods.map(food => `<li>${food}</li>`).join("")}
 
 function petTemplate(pet) {
   return `
-    <div class="animal">
+    <div class="card">
     <img class="pet-photo" src="${pet.photo}">
     <h2 class="pet-name">${pet.name} <span class="species">(${pet.species})</span></h2>
     <p><strong>Age:</strong> ${age(pet.birthYear)}</p>
