@@ -167,6 +167,117 @@ This raised the need to innovate and develop systems that can be implemented to 
 
   </footer>
   
+    
+    
+    
+        
+    <!------EEEEEENNNNDDDDD----->
+    
+<script>
+var postData = [{
+    "type": "* RENEWING *",
+    "year": "THREE",
+    "memurl": "https://example.com/smithville.html#5a2f81",
+    "memimgsrc": "https://example.com/smithville.html/u/#59e5c8.jpg",
+    "membername": "Andy Smith",
+    "group": "Smithville",
+    "company": "Andys Lawn",
+    "classification": "Gardening"
+  },
+  {
+    "type": "* RENEWING *",
+    "year": "FOUR",
+    "memurl": "https://example.com/brownsville.html#5a2f86",
+    "memimgsrc": "https://example.com/brownsville.html/u/#5a2f86.jpg",
+    "membername": "Dave Brown",
+    "group": "Brownsville",
+    "company": "Daves Paint",
+    "classification": "Paint"
+  },
+  {
+    "type": "* NEW *",
+    "year": "ONE",
+    "memurl": "https://example.com/applegate.html#5b3a51",
+    "memimgsrc": "https://example.com/applegate.html/u/#5b3a51.jpg",
+    "membername": "May Apple",
+    "group": "Applegate",
+    "company": "Marys Conserves",
+    "classification": "Canning"
+  }
+];
+
+function append_json(data) {
+  //Set Up the template
+  var s = $("#postTemplate")[0].innerHTML.trim();
+  var holder = document.createElement('div');
+  holder.innerHTML = s;
+  var template = holder.childNodes;
+
+  var member = document.getElementById('newmembers');
+  data.forEach(function(object) {
+
+    //Clone Template
+    var newItem = $(template).clone();
+
+    //Populate it
+    $(newItem).find(".type").html(object.type);
+    $(newItem).find(".year").html($(newItem).find(".year").html() + " " + object.year);
+    $(newItem).find(".memurl").attr("href", object.memurl);
+    var img = $(newItem).find(".thumb")
+    $(img).attr("src", object.memimgsrc).attr("alt", $(img).attr("alt") + object.membername + " " + "etc")
+      .attr("title", $(img).attr("title") + object.membername + " finish this off");
+    $(newItem).find(".membername").html(object.membername);
+    $(newItem).find(".group").html(object.group);
+    $(newItem).find(".company").html(object.company);
+    $(newItem).find(".classification").html(object.classification);
+    //Append it
+
+    $(".newmembers").append(newItem);
+
+  });
+}
+
+$("document").ready(function() {
+  append_json(postData);
+});
+
+</script>
+
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
+<div class="newmembers">
+
+  <!-- Template for our posts -->
+  <script type="text/template" id="postTemplate">
+    <div class="member">
+      <p class="type"></p>
+      <p class="year">Year:</p>
+      <a class="memurl" href="">
+        <img class="thumb" alt="MEMBER PROFILE: " title="MEMBER PROFILE: " src="">
+      </a>
+      <!-- Replaced p  with div, can't nest p tags -->
+      <div class="info">
+        <p class="membername"></p>
+        <p class="group"></p>
+        <p class="company"></p>
+        <p class="classification"></p>
+      </div>
+
+    </div>
+  </script>
+
+
+
+
+</div>
+    
+    <!------EEEEEENNNNDDDDD----->
+    
   
 
 <!-- End page content -->
