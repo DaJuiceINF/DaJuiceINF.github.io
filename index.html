@@ -167,7 +167,7 @@ This raised the need to innovate and develop systems that can be implemented to 
 
   </footer>
   
-    
+    <div id="app"></div>
     
     
         
@@ -175,110 +175,73 @@ This raised the need to innovate and develop systems that can be implemented to 
     
 <script>
 
-
-</script>
-
-
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
-    
-    var postData = [{
-    "type": "* RENEWING *",
-    "year": "THREE",
-    "memurl": "https://example.com/smithville.html#5a2f81",
-    "memimgsrc": "https://example.com/smithville.html/u/#59e5c8.jpg",
-    "membername": "Andy Smith",
-    "group": "Smithville",
-    "company": "Andys Lawn",
-    "classification": "Gardening"
+  
+  const petsData = [
+  {
+    name: "Purrsloud",
+    species: "Cat",
+    favFoods: ["wet food", "dry food", "<strong>any</strong> food"],
+    birthYear: 2016,
+    photo: "https://learnwebcode.github.io/json-example/images/cat-2.jpg"
   },
   {
-    "type": "* RENEWING *",
-    "year": "FOUR",
-    "memurl": "https://example.com/brownsville.html#5a2f86",
-    "memimgsrc": "https://example.com/brownsville.html/u/#5a2f86.jpg",
-    "membername": "Dave Brown",
-    "group": "Brownsville",
-    "company": "Daves Paint",
-    "classification": "Paint"
+    name: "Barksalot",
+    species: "Dog",
+    birthYear: 2008,
+    photo: "https://learnwebcode.github.io/json-example/images/dog-1.jpg"
   },
   {
-    "type": "* NEW *",
-    "year": "ONE",
-    "memurl": "https://example.com/applegate.html#5b3a51",
-    "memimgsrc": "https://example.com/applegate.html/u/#5b3a51.jpg",
-    "membername": "May Apple",
-    "group": "Applegate",
-    "company": "Marys Conserves",
-    "classification": "Canning"
+    name: "Meowsalot",
+    species: "Cat",
+    favFoods: ["tuna", "catnip", "celery"],
+    birthYear: 2012,
+    photo: "https://learnwebcode.github.io/json-example/images/cat-1.jpg"
   }
 ];
 
-function append_json(data) {
-  //Set Up the template
-  var s = $("#postTemplate")[0].innerHTML.trim();
-  var holder = document.createElement('div');
-  holder.innerHTML = s;
-  var template = holder.childNodes;
-
-  var member = document.getElementById('newmembers');
-  data.forEach(function(object) {
-
-    //Clone Template
-    var newItem = $(template).clone();
-
-    //Populate it
-    $(newItem).find(".type").html(object.type);
-    $(newItem).find(".year").html($(newItem).find(".year").html() + " " + object.year);
-    $(newItem).find(".memurl").attr("href", object.memurl);
-    var img = $(newItem).find(".thumb")
-    $(img).attr("src", object.memimgsrc).attr("alt", $(img).attr("alt") + object.membername + " " + "etc")
-      .attr("title", $(img).attr("title") + object.membername + " finish this off");
-    $(newItem).find(".membername").html(object.membername);
-    $(newItem).find(".group").html(object.group);
-    $(newItem).find(".company").html(object.company);
-    $(newItem).find(".classification").html(object.classification);
-    //Append it
-
-    $(".newmembers").append(newItem);
-
-  });
+function age(birthYear) {
+  let calculatedAge = new Date().getFullYear() - birthYear;
+  if (calculatedAge == 1) {
+    return "1 year old";
+  } else if (calculatedAge == 0) {
+    return "Baby";
+  } else {
+    return `${calculatedAge} years old`;
+  }
 }
 
-$("document").ready(function() {
-  append_json(postData);
-});
-    
-    </script>
+function foods(foods) {
+  return `
+<h4>Favorite Foods</h4>
+<ul class="foods-list">
+${foods.map(food => `<li>${food}</li>`).join("")}
+</ul>
+`;
+}
 
-
-<div class="newmembers">
-
-  <!-- Template for our posts -->
-  <script type="text/template" id="postTemplate">
-    <div class="member">
-      <p class="type"></p>
-      <p class="year">Year:</p>
-      <a class="memurl" href="">
-        <img class="thumb" alt="MEMBER PROFILE: " title="MEMBER PROFILE: " src="">
-      </a>
-      <!-- Replaced p  with div, can't nest p tags -->
-      <div class="info">
-        <p class="membername"></p>
-        <p class="group"></p>
-        <p class="company"></p>
-        <p class="classification"></p>
-      </div>
-
+function petTemplate(pet) {
+  return `
+    <div class="animal">
+    <img class="pet-photo" src="${pet.photo}">
+    <h2 class="pet-name">${pet.name} <span class="species">(${pet.species})</span></h2>
+    <p><strong>Age:</strong> ${age(pet.birthYear)}</p>
+    ${pet.favFoods ? foods(pet.favFoods) : ""}
     </div>
-  </script>
+  `;
+}
 
+document.getElementById("app").innerHTML = `
+  <h1 class="app-title">Pets (${petsData.length} results)</h1>
+  ${petsData.map(petTemplate).join("")}
+  <p class="footer">These ${petsData.length} pets were added recently. Check back soon for updates.</p>
+`;
 
+  
+  
+  
 
+</script>
 
-</div>
     
     <!------EEEEEENNNNDDDDD----->
     
